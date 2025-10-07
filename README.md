@@ -1,107 +1,111 @@
-# 💳 Credit Risk Assessment  
-*A QuantShift-Lab Research Project*  
+# 📈 Price Elasticity & Revenue Sensitivity Analysis  
+*A QuantShift-Lab Applied Economics Project*  
 
 ---
 
-## 📘 Overview  
-This repository is part of **QuantShift-Lab**, a research-driven initiative focused on the intersection of **data science, quantitative analysis, and financial modeling**.  
-The **Credit Risk Assessment** project explores machine-learning-based methods for predicting credit card default risk using data from the [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients).
+## 🧠 Overview  
+This project investigates **price elasticity of demand** and its downstream effect on **revenue and profit sensitivity** using real-world transactional or simulated retail data.  
+The goal is to build a transparent, data-driven framework that quantifies how price changes influence total revenue, enabling more informed pricing strategies and market modeling.  
 
-The primary goal is to build an interpretable, reproducible, and scalable pipeline that models customer credit behavior and quantifies default probabilities through statistical and machine learning techniques.
+The current phase focuses on exploratory data analysis, elasticity estimation, and visualization of demand curves using Python-based econometric methods.  
 
 ---
 
-## 🧩 Repository Structure  
+## 🧩 Repository Structure (Anticipated)  
 ```bash
-Credit-Risk-Assessment/
+Elasticity-Analysis/
 │
-├── notebooks/             # Jupyter notebooks for EDA and modeling
-├── docs/                  # Research notes, analysis summaries, and roadmap
-├── environment.yml        # Conda environment for reproducibility
-├── structure.ipynb        # Current active notebook for exploration & modeling
-├── LICENSE                # MIT License
-└── README.md              # Project documentation
+├── notebooks/               # Core Jupyter notebooks for exploration and modeling
+├── data/                    # Raw and processed datasets (excluded in .gitignore)
+├── docs/                    # Research notes and visual summaries
+├── environment.yml          # Conda environment for reproducibility
+├── elasticity_model.ipynb   # Main notebook for EDA, modeling, and visualization
+├── LICENSE                  # MIT License
+└── README.md                # Project documentation
 ```
 
 ---
 
 ## 🔄 Current Progress & Beyond
 
-### 🧹 **Phase 1: Data Exploration & Preparation (In Progress)**
-- Imported and validated the UC Irvine Credit Card Default dataset.  
-- Standardized column names, adjusted data types, and verified schema consistency.  
-- Explored missing values, duplicates, and outlier behavior.  
-- Conducted univariate and bivariate analysis to understand demographic and behavioral drivers of default.  
-- Identified class imbalance in the target variable and began assessing resampling strategies.  
-- Documented workflow in `structure.ipynb` to ensure transparency and reproducibility.  
+### 🧹 **Phase 1: Data Exploration & Cleaning (In Progress)**
+- Imported and profiled product-level sales dataset.  
+- Verified numerical consistency between price, quantity, and revenue fields.  
+- Cleaned and standardized column names; corrected outliers and data entry anomalies.  
+- Conducted exploratory data analysis (EDA) to visualize demand trends and relationships.  
+- Computed descriptive statistics for price, volume, and total revenue.  
+- Confirmed expected inverse price–quantity relationship through scatter and log–log plots.  
+- Generated initial visualizations showing demand sensitivity and revenue concentration zones.
 
-**Key Early Insights:**
-- Payment history features (PAY_0–PAY_6) show strong correlation with default behavior.  
-- Balance and limit ratios are likely to be key predictive variables.  
-- Data imbalance will require mitigation via SMOTE or cost-sensitive learning.  
-
----
-
-### 🧠 **Phase 2: Model Development (Planned)**
-- Construct baseline classification models:
-  - Logistic Regression (interpretable benchmark).  
-  - Random Forest and XGBoost (non-linear performance comparison).  
-- Evaluate key metrics: Accuracy, Precision, Recall, F1-Score, ROC-AUC.  
-- Build confusion matrices and ROC curves to visualize model performance.  
-- Implement k-fold and stratified cross-validation to validate results.  
-- Integrate data balancing techniques (SMOTE, class-weighting) for improved recall on minority classes.  
-
-**Expected Deliverables:**
-- Baseline model comparison table.  
-- Model evaluation notebook under `/notebooks`.  
-- Initial write-up of findings for `/docs/baseline_report.md`.  
+**Key Early Findings:**  
+- Quantity demanded exhibits clear negative elasticity with respect to price.  
+- Revenue peaks in the mid-price range, suggesting the presence of an optimal pricing window.  
+- Outliers correspond to promotional periods or bulk purchase behavior, which will need segmentation.
 
 ---
 
-### ⚙️ **Phase 3: Optimization & Explainability (Planned)**
-- Apply hyperparameter tuning via GridSearchCV and Optuna for each model.  
-- Engineer composite behavioral features (e.g., payment ratio, utilization, trend deltas).  
-- Use feature selection methods (Recursive Feature Elimination, Mutual Information).  
-- Introduce model interpretability layers:
-  - SHAP (Shapley Additive Explanations) for global and local feature effects.  
-  - LIME for instance-level interpretability.  
-- Establish version-controlled pipeline functions to streamline retraining.  
+### 🧮 **Phase 2: Elasticity Modeling (Next Phase)**
+- Implement baseline elasticity estimation using log-log regression (`ln(Q) = a + b·ln(P)`).  
+- Interpret regression coefficient `b` as point elasticity of demand.  
+- Experiment with polynomial and piecewise regressions to capture nonlinear elasticity.  
+- Segment dataset by product or time period to compare elasticity across groups.  
+- Validate model assumptions (normality, homoscedasticity, multicollinearity).  
+- Benchmark results using R², RMSE, and adjusted R² for fit quality.
 
-**Research Objective:**  
-Enhance predictive accuracy while maintaining explainability — aligning with QuantShift-Lab’s commitment to interpretable AI in financial systems.  
-
----
-
-### 📊 **Phase 4: Reporting & Visualization (Future Work)**
-- Design visual dashboards to communicate credit risk insights:
-  - Streamlit or Dash application for quick exploration.  
-  - Seaborn/Matplotlib visualizations for feature distributions, correlations, and SHAP outputs.  
-- Generate static reports (`/docs/reports/`) for internal reviews and academic reference.  
-- Build a modular notebook template for reproducible experimentation across datasets.  
-
-**Target Outcome:**  
-Provide a transparent, interactive reporting system that bridges technical findings and business-level interpretation.
+**Deliverables:**  
+- Elasticity estimation notebook.  
+- Comparison of model performance across methods.  
+- Summary report (`/docs/elasticity_results.md`).  
 
 ---
 
-### 🧮 **Phase 5: Model Deployment & Scaling (Future Work)**
-- Persist trained models using `joblib` for reproducibility.  
-- Wrap inference pipeline in FastAPI for serving risk predictions via REST API.  
-- Create Docker environment for isolated deployment testing.  
-- Integrate GitHub Actions for CI/CD model retraining workflow.  
-- Prepare cloud-deployment prototype (AWS S3 + EC2 or Lambda-based microservice).  
+### ⚙️ **Phase 3: Revenue Sensitivity & Optimization (Planned)**
+- Simulate revenue responses to incremental price changes (±5%, ±10%, ±20%).  
+- Compute marginal revenue and profit-maximizing price points.  
+- Introduce variable cost estimates to model contribution margin.  
+- Develop elasticity–revenue surface plots for scenario analysis.  
+- Quantify total revenue impact under varying elasticity assumptions.  
+- Document results for visualization in dashboard phase.
 
-**Long-Term Goal:**  
-Demonstrate a scalable architecture for ML-based credit risk scoring suitable for fintech and data science integration pipelines.  
+**Objective:**  
+Identify data-driven pricing zones that maximize revenue while maintaining realistic demand levels.
 
 ---
 
-### 🧭 **Phase 6: Quantitative Expansion & Research Continuity**
-- Extend dataset with external macroeconomic variables (e.g., interest rates, inflation).  
-- Test time-based models to explore behavioral drift and credit cycle effects.  
-- Compare classical ML approaches with deep learning baselines (e.g., MLP, TabNet).  
-- Develop a general-purpose credit scoring framework reusable for future QuantShift-Lab research.  
-- Draft and publish a whitepaper summarizing methodology, results, and future directions.  
+### 📊 **Phase 4: Visualization & Dashboard Development (Future Work)**
+- Build Streamlit dashboard for interactive elasticity exploration.  
+- Integrate sliders for price adjustment and elasticity coefficients.  
+- Plot real-time demand curves, marginal revenue, and profit projections.  
+- Display heatmaps of elasticity across products or regions.  
+- Export dashboard analytics as static HTML or PDF reports.
+
+**Technical Focus:**  
+Combine analytical transparency with visual interpretability to support managerial decision-making.
+
+---
+
+### 🧭 **Phase 5: Quantitative Extensions & Research Expansion (Long-Term)**
+- Extend framework to cross-price elasticity analysis for complementary and substitute goods.  
+- Incorporate macroeconomic factors (e.g., income, inflation) to study contextual elasticity.  
+- Explore causal inference methods (Difference-in-Differences, Instrumental Variables) for promotions.  
+- Integrate time-series elasticity tracking to observe behavioral drift.  
+- Develop `elasticity_toolkit` module for reusable QuantShift-Lab econometric workflows.  
 
 **Research Vision:**  
-This project aims to evolve into a reproducible credit risk modeling framework — bridging **data science, financial modeling, and interpretability** within QuantShift-Lab’s open research ecosystem.
+Evolve this notebook into a reproducible, open-source elasticity modeling framework that bridges economics, data science, and applied quantitative research.
+
+---
+
+## ✉️ Contact
+
+**Brice A. Nelson**  
+Founder, **QuantShift-Lab**  
+Python Backend Engineer | Applied Quantitative Researcher  
+
+🌐 [devbybrice.com](https://www.devbybrice.com)  
+📧 brice@devbybrice.com  
+🔗 [LinkedIn](https://www.linkedin.com/in/brice-a-nelson-p-e-mba-36b28b15/) • [GitHub](https://github.com/QuantShift-Lab)  
+
+---
+
+> _QuantShift-Lab: advancing reproducible, quantitative research in economics, finance, and data science._
